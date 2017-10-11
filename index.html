@@ -3,15 +3,15 @@
     <head>
         <meta charset="utf-8">
         <title></title>
+        <style media="screen">
+            .is-loading {
+                background: red;
+            }
+        </style>
     </head>
     <body>
         <div id="root">
-            <ul>
-                <li v-for="name in names" v-text="name"></li>
-            </ul>
-
-            <input id="input" type="text" v-model="newName" v-on:keyUp="addName">
-            <button @click="addName">Add Name</button>
+            <button :class="{ 'is-loading': isLoading }" @click="toggleClass">Toggle Me</button>
         </div>
 
         <script src="https://unpkg.com/vue"></script>
@@ -20,15 +20,13 @@
             new Vue({
                 el: '#root',
                 data: {
-                    newName: '',
-                    names: ['Joe', 'Jane', 'Mary', 'Jack'],
+                    isLoading: false,
                 },
                 methods: {
-                    addName() {
-                        this.names.push(this.newName);
-                        this.newName = '';
+                    toggleClass() {
+                        this.isLoading = !this.isLoading;
                     }
-                },
+                }
             });
         </script>
     </body>
